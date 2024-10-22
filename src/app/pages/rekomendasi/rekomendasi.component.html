@@ -1,0 +1,132 @@
+<div
+  class="h-screen w-screen max-h-screen overflow-hidden flex flex-col space-y-10 justify-center items-center space-x-20"
+>
+  <div class="text-center">
+    <p class="text-3xl text-blue-500 font-bold">Rekomendasi</p>
+    <p>
+      Silahkan masukkan data dan nilai-nilai calon murid dibawah ini untuk mulai
+      menentukan rekomendasi
+    </p>
+  </div>
+  <form
+    action=""
+    class="w-[60%] p-2 space-y-4 max-h-[65%] overflow-y-auto"
+    id="form"
+  >
+    <div class="flex flex-col space-y-2">
+      <label>Nama Calon Murid</label>
+      <input
+        type="text"
+        class="border border-blue-200 rounded-md p-1"
+        placeholder="Masukkan nama murid"
+      />
+    </div>
+    <div class="flex flex-col space-y-2">
+      <label>Jurusan Pilihan</label>
+      <select name="" class="border border-blue-200 rounded-md p-1 pr-4">
+        <option value="#" disabled selected>Pilih Jurusan Yang Dipilih</option>
+        <option value="">Teknik Audio & Video</option>
+        <option value="">Teknik dan Bisnis Sepeda Motor</option>
+        <option value="">Teknik Elektronika Industri</option>
+        <option value="">Teknik Instalasi Tenaga Listrik</option>
+        <option value="">Teknik Komputer Jaringan</option>
+      </select>
+    </div>
+    <div class="grid grid-cols-2 space-x-4">
+      <div class="flex flex-col space-y-2">
+        <label>Pend. Agama</label>
+        <input
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Contoh: 80"
+        />
+      </div>
+      <div class="flex flex-col space-y-2">
+        <label>Bahasa Indonesia</label>
+        <input
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Contoh: 80"
+        />
+      </div>
+    </div>
+    <div class="grid grid-cols-2 space-x-4">
+      <div class="flex flex-col space-y-2">
+        <label>Matematika</label>
+        <input
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Contoh: 80"
+        />
+      </div>
+      <div class="flex flex-col space-y-2">
+        <label>Sejarah</label>
+        <input
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Contoh: 80"
+        />
+      </div>
+    </div>
+    <div class="grid grid-cols-2 space-x-4">
+      <div class="flex flex-col space-y-2">
+        <label>Bahasa Inggris</label>
+        <input
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Contoh: 80"
+        />
+      </div>
+      <div class="flex flex-col space-y-2">
+        <label>Seni Budaya</label>
+        <input
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Contoh: 80"
+        />
+      </div>
+    </div>
+    <div class="grid grid-cols-2 space-x-4">
+      <div class="flex flex-col space-y-2">
+        <label>Olahraga dan Keterampilan</label>
+        <input
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Contoh: 80"
+        />
+      </div>
+      <div class="flex flex-col space-y-2">
+        <label>Fisika</label>
+        <input
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Contoh: 80"
+        />
+      </div>
+    </div>
+    <div class="grid grid-cols-2 space-x-4">
+      <div class="flex flex-col space-y-2">
+        <label>Bahasa Jawa</label>
+        <input
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Contoh: 80"
+        />
+      </div>
+    </div>
+    <div class="grid grid-cols-1 space-x-4">
+      <div class="flex flex-col space-y-2">
+        <button
+          id="submit"
+          type="button"
+          (click)="onSubmit()"
+          class="w-full text-white p-2 rounded-md hover:bg-blue-700"
+          [ngClass]="isLoading ? 'bg-blue-700 opacity-55' : 'bg-blue-500 '"
+          [disabled]="isLoading"
+        >
+          {{ isLoading ? "Loading..." : "Cek Rekomendasi" }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
