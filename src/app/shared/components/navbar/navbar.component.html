@@ -21,5 +21,12 @@
     >
       Riwayat
     </a>
+    <button
+      *ngIf="isLogedIn"
+      (click)="onLogout()"
+      class="border py-1 p-2 rounded-md border-blue-500 hover:bg-blue-500 text-blue-500 hover:text-white"
+    >
+      Logout
+    </button>
   </div>
 </nav>

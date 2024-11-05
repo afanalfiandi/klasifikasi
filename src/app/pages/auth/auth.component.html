@@ -1,0 +1,35 @@
+<div class="h-screen w-screen flex justify-center items-center">
+  <div class="bg-white shadow-md p-8 rounded-lg">
+    <p class="text-xl mb-4 font-semibold">
+      Untuk mulai menggunakan sistem rekomendasi, silahkan login terlebih dahulu
+    </p>
+
+    <div class="flex flex-col mb-3">
+      <label class="text-lg">Username</label>
+      <input
+        class="bg-gray-100 p-3 rounded-md mt-2"
+        (keyup)="onHandleUsername($event)"
+        type="text"
+        placeholder="Username"
+      />
+    </div>
+    <div class="flex flex-col mb-4">
+      <label class="text-lg">Password</label>
+      <input
+        (keyup)="onHandlePassword($event)"
+        class="bg-gray-100 p-3 rounded-md mt-2"
+        type="password"
+        placeholder="Password"
+      />
+    </div>
+    <div>
+      <button
+        type="button"
+        (click)="onSubmit()"
+        class="bg-blue-500 w-full text-white p-3 flex justify-center items-center rounded-lg mt-2 hover:bg-blue-700"
+      >
+        Login
+      </button>
+    </div>
+  </div>
+</div>

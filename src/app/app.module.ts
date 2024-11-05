@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { RiwayatComponent } from './pages/riwayat/riwayat.component';
 import { RekomendasiComponent } from './pages/rekomendasi/rekomendasi.component';
 import { HomeComponent } from './pages/home/home.component';
+import { AuthComponent } from './pages/auth/auth.component';
+import { provideHttpClient } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,9 +24,10 @@ import { HomeComponent } from './pages/home/home.component';
     RiwayatComponent,
     RekomendasiComponent,
     HomeComponent,
+    AuthComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
