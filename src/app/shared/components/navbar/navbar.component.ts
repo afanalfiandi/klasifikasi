@@ -15,6 +15,14 @@ export class NavbarComponent implements OnInit {
     this.onCheckLocalStorage();
   }
 
+  ngAfterViewInit(): void {
+    this.onCheckLocalStorage();
+  }
+
+  ngAfterViewContentChecked() {
+    this.onCheckLocalStorage();
+  }
+
   onCheckLocalStorage() {
     const authData = JSON.stringify(localStorage.getItem('authData'));
 
@@ -27,6 +35,7 @@ export class NavbarComponent implements OnInit {
 
   onLogout() {
     localStorage.removeItem('authData');
+    this.isLogedIn = false;
 
     this.router.navigate(['auth']);
   }
