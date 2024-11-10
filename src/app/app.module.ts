@@ -14,6 +14,8 @@ import { RekomendasiComponent } from './pages/rekomendasi/rekomendasi.component'
 import { HomeComponent } from './pages/home/home.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { provideHttpClient } from '@angular/common/http';
+import { DataTablesModule } from 'angular-datatables';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,7 @@ import { provideHttpClient } from '@angular/common/http';
     HomeComponent,
     AuthComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, RouterModule],
+  imports: [BrowserModule, AppRoutingModule, RouterModule, DataTablesModule],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })

@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { ResultDTO } from './dtos/result.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +38,7 @@ export class RekomendasiService {
       .set('jw', jw)
       .set('jurusanString', jurusanString);
 
-    const url = environment.apiUrl + '?act=onCalculateSingle';
+    const url = environment.apiUrl + '?act=classification';
 
     const option = { params: qParams };
     return this.http.get<Observable<any[]>>(url, option);
@@ -46,6 +47,6 @@ export class RekomendasiService {
   onGetJurusan() {
     const url = environment.apiUrl + '?act=getJurusan';
 
-    return this.http.get<Observable<any[]>>(url);
+    return this.http.get<Observable<ResultDTO[]>>(url);
   }
 }

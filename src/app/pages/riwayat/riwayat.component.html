@@ -14,7 +14,12 @@
       <div class="-m-1.5 overflow-x-auto">
         <div class="p-1.5 min-w-full inline-block align-middle">
           <div class="overflow-hidden">
-            <table class="min-w-full divide-y divide-gray-200">
+            <table
+              *ngIf="records.length"
+              datatable
+              [dtOptions]="dtOptions"
+              class="min-w-full divide-y divide-gray-200 row-border hover"
+            >
               <thead>
                 <tr>
                   <th
@@ -95,48 +100,57 @@
                   >
                     Hasil Rekomendasi Jurusan
                   </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                  >
+                    Akurasi
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let record of records">
+                <tr *ngFor="let record of records; let i = index">
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.no }}
+                    {{ i + 1 }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                     {{ record.nama }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.jurusanPilihan }}
+                    {{ record.jurusan_pilihan }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.agama }}
+                    {{ record.pai }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.indonesia }}
+                    {{ record.bi }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.matematika }}
+                    {{ record.mtk }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.sejarah }}
+                    {{ record.sej }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.inggris }}
+                    {{ record.bing }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.seniBudaya }}
+                    {{ record.senbud }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.olahraga }}
+                    {{ record.ok }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.fisika }}
+                    {{ record.fis }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.jawa }}
+                    {{ record.bj }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    {{ record.hasilRekomendasi }}
+                    {{ record.jurusan_rekomendasi }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                    {{ record.akurasi }}%
                   </td>
                 </tr>
               </tbody>

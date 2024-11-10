@@ -94,15 +94,15 @@ export class RekomendasiComponent implements OnInit {
         tap((item: any) => {
           this.isLoading = true;
 
-          setTimeout(() => {
+          if (item) {
             this.isLoading = false;
             Swal.fire({
               title: 'Rekomendasi Jurusan',
-              text: `Berdasarkan nilai yang Anda masukkan, jurusan yang cocok adalah: ${item.rekomendasi} dengan presentase sebesar ${item.accuracy}%`,
+              text: `Berdasarkan nilai yang Anda masukkan, jurusan yang cocok adalah: ${item.jurusan_rekomendasi}`,
               icon: 'success',
               confirmButtonText: 'OK',
             });
-          }, 3000);
+          }
         })
       )
       .subscribe();

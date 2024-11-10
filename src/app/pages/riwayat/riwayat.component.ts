@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { RiwayatService } from './riwayat.service';
+import { Subject, tap } from 'rxjs';
+import { RiwayatDTO } from './dtos/result.dto';
+import 'datatables.net';
+import { Config } from 'datatables.net';
 
 @Component({
   selector: 'app-riwayat',
@@ -6,37 +11,37 @@ import { Component } from '@angular/core';
   styleUrl: './riwayat.component.css',
 })
 export class RiwayatComponent {
-  data = ['Eko Muhammad', 'Larasati Rahayu', 'Dwi Marpaung', 'Bunga Rismawar'];
-  jurusan = ['TITL', 'TAV', 'TKJ', 'TBSM', 'TEI'];
-  records: any[] = [];
+  constructor(private riwayatService: RiwayatService) {}
+
+  records: RiwayatDTO[] = [];
+
+  dtOptions: Config = {};
+  dtTrigger: Subject<any> = new Subject();
 
   ngOnInit(): void {
-    this.populateRecords();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      scrollX: true,
+      processing: true,
+      deferRender: true,
+      destroy: true,
+    };
+    this.getRiwayat();
   }
 
-  populateRecords() {
-    this.records = this.data.map((student, index) => ({
-      no: index + 1,
-      nama: student,
-      jurusanPilihan: this.jurusan[index],
-      agama: this.getRandomScore(),
-      indonesia: this.getRandomScore(),
-      matematika: this.getRandomScore(),
-      sejarah: this.getRandomScore(),
-      inggris: this.getRandomScore(),
-      seniBudaya: this.getRandomScore(),
-      olahraga: this.getRandomScore(),
-      fisika: this.getRandomScore(),
-      jawa: this.getRandomScore(),
-      hasilRekomendasi: this.getRandomJurusan(),
-    }));
+  ngAfterViewInit(): void {
+    this.dtTrigger.next(true);
   }
 
-  getRandomScore(): number {
-    return Math.floor(Math.random() * (89 - 72 + 1)) + 72;
-  }
-
-  getRandomJurusan(): string {
-    return this.jurusan[Math.floor(Math.random() * this.jurusan.length)];
+  getRiwayat() {
+    this.riwayatService
+      .onGetRiwayat()
+      .pipe(
+        tap((data: any) => {
+          this.records = data;
+        })
+      )
+      .subscribe();
   }
 }
