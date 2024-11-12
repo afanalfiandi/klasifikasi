@@ -98,7 +98,7 @@ export class RekomendasiComponent implements OnInit {
             this.isLoading = false;
             Swal.fire({
               title: 'Rekomendasi Jurusan',
-              text: `Berdasarkan nilai yang Anda masukkan, jurusan yang cocok adalah: ${item.jurusan_rekomendasi}`,
+              text: `Berdasarkan nilai yang Anda masukkan, jurusan yang cocok adalah: ${item.hasil_jurusan_rekomendasi} dengan presentase akurasi sebesar ${item.akurasi_tertinggi}`,
               icon: 'success',
               confirmButtonText: 'OK',
             });
