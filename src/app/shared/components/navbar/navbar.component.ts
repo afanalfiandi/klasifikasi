@@ -13,25 +13,31 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.onCheckLocalStorage();
+    window.addEventListener('storage', this.onStorageChange);
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('storage', this.onStorageChange);
   }
 
   ngAfterViewInit(): void {
     this.onCheckLocalStorage();
   }
 
-  ngAfterViewContentChecked() {
+  ngAfterViewContentChecked(): void {
     this.onCheckLocalStorage();
   }
 
   onCheckLocalStorage() {
-    const authData = JSON.stringify(localStorage.getItem('authData'));
-
-    if (authData === null || authData === 'null') {
-      this.isLogedIn = false;
-    } else {
-      this.isLogedIn = true;
-    }
+    const authData = localStorage.getItem('authData');
+    this.isLogedIn = authData !== null;
   }
+
+  onStorageChange = (event: StorageEvent) => {
+    if (event.key === 'authData') {
+      this.onCheckLocalStorage(); // Update isLogedIn saat 'authData' diubah
+    }
+  };
 
   onLogout() {
     localStorage.removeItem('authData');

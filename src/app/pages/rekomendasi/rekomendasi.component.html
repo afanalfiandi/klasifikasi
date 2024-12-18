@@ -1,145 +1,205 @@
 <div
-  class="h-screen w-screen max-h-screen overflow-hidden flex flex-col space-y-10 justify-center items-center space-x-20"
+  class="min-h-screen h-full w-screen max-h-screen overflow-hidden flex flex-col space-y-10 justify-center items-center space-x-20"
 >
-  <div class="text-center">
-    <p class="text-3xl text-blue-500 font-bold">Rekomendasi</p>
-    <p>
-      Silahkan masukkan data dan nilai-nilai calon murid dibawah ini untuk mulai
-      menentukan rekomendasi
-    </p>
-  </div>
   <form
     action=""
-    class="w-[60%] p-2 space-y-4 max-h-[65%] overflow-y-auto"
+    class="w-[60%] max-h-[65%] p-2 space-y-4 overflow-y-auto no-scrollbar"
     id="form"
+    [ngClass]="{ 'h-full': activeTab === 1 }"
   >
-    <div class="flex flex-col space-y-2">
-      <label>Nama Calon Murid</label>
-      <input
-        (keyup)="onHandleNama($event)"
-        type="text"
-        class="border border-blue-200 rounded-md p-1"
-        placeholder="Masukkan nama murid"
-      />
+    <div class="text-center">
+      <p class="text-3xl text-blue-500 font-bold">Rekomendasi</p>
+      <p *ngIf="activeTab === 0">
+        Silahkan masukkan data dan nilai-nilai calon murid dibawah ini untuk
+        mulai menentukan rekomendasi
+      </p>
+      <p *ngIf="activeTab === 1">Silahkan upload file Anda terlebih dahulu!</p>
     </div>
-    <div class="flex flex-col space-y-2">
-      <label>Jurusan Pilihan</label>
-      <select
-        #mySelect
-        (change)="onHandleJurusan(mySelect)"
-        name=""
-        class="border border-blue-200 rounded-md p-1 pr-4"
-      >
-        <option value="#" disabled selected>Pilih Jurusan Yang Dipilih</option>
-        <option *ngFor="let item of dataJurusan" [value]="item.id_jurusan">
-          {{ item.jurusan }}
-        </option>
-      </select>
-    </div>
-    <div class="grid grid-cols-2 space-x-4">
-      <div class="flex flex-col space-y-2">
-        <label>Pend. Agama</label>
-        <input
-          type="text"
-          (keyup)="onHandlePai($event)"
-          class="border border-blue-200 rounded-md p-1"
-          placeholder="Contoh: 80"
-        />
-      </div>
-      <div class="flex flex-col space-y-2">
-        <label>Bahasa Indonesia</label>
-        <input
-          type="text"
-          (keyup)="onHandleBi($event)"
-          class="border border-blue-200 rounded-md p-1"
-          placeholder="Contoh: 80"
-        />
-      </div>
-    </div>
-    <div class="grid grid-cols-2 space-x-4">
-      <div class="flex flex-col space-y-2">
-        <label>Matematika</label>
-        <input
-          type="text"
-          (keyup)="onHandleMtk($event)"
-          class="border border-blue-200 rounded-md p-1"
-          placeholder="Contoh: 80"
-        />
-      </div>
-      <div class="flex flex-col space-y-2">
-        <label>Sejarah</label>
-        <input
-          type="text"
-          (keyup)="onHandleSej($event)"
-          class="border border-blue-200 rounded-md p-1"
-          placeholder="Contoh: 80"
-        />
-      </div>
-    </div>
-    <div class="grid grid-cols-2 space-x-4">
-      <div class="flex flex-col space-y-2">
-        <label>Bahasa Inggris</label>
-        <input
-          type="text"
-          (keyup)="onHandleBing($event)"
-          class="border border-blue-200 rounded-md p-1"
-          placeholder="Contoh: 80"
-        />
-      </div>
-      <div class="flex flex-col space-y-2">
-        <label>Seni Budaya</label>
-        <input
-          type="text"
-          (keyup)="onHandleSenbud($event)"
-          class="border border-blue-200 rounded-md p-1"
-          placeholder="Contoh: 80"
-        />
-      </div>
-    </div>
-    <div class="grid grid-cols-2 space-x-4">
-      <div class="flex flex-col space-y-2">
-        <label>Olahraga dan Keterampilan</label>
-        <input
-          type="text"
-          (keyup)="onHandleOk($event)"
-          class="border border-blue-200 rounded-md p-1"
-          placeholder="Contoh: 80"
-        />
-      </div>
-      <div class="flex flex-col space-y-2">
-        <label>Fisika</label>
-        <input
-          type="text"
-          (keyup)="onHandleFis($event)"
-          class="border border-blue-200 rounded-md p-1"
-          placeholder="Contoh: 80"
-        />
-      </div>
-    </div>
-    <div class="grid grid-cols-2 space-x-4">
-      <div class="flex flex-col space-y-2">
-        <label>Bahasa Jawa</label>
-        <input
-          type="text"
-          (keyup)="onHandleBj($event)"
-          class="border border-blue-200 rounded-md p-1"
-          placeholder="Contoh: 80"
-        />
-      </div>
-    </div>
-    <div class="grid grid-cols-1 space-x-4">
-      <div class="flex flex-col space-y-2">
+    <ng-container *ngIf="role == 1">
+      <div class="w-full flex justify-between">
         <button
-          id="submit"
           type="button"
-          (click)="onSubmit()"
-          class="w-full text-white p-2 rounded-md hover:bg-blue-700"
+          (click)="onSelectTab(0)"
+          [ngClass]="{ 'border-b-2 border-blue-500': activeTab === 0 }"
+          class="w-full p-2"
+        >
+          Siswa
+        </button>
+        <button
+          type="button"
+          (click)="onSelectTab(1)"
+          [ngClass]="{ 'border-b-2 border-blue-500': activeTab === 1 }"
+          class="w-full p-2"
+        >
+          Upload file
+        </button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTab === 0">
+      <div class="flex flex-col space-y-2">
+        <label>Nama Calon Murid</label>
+        <input
+          (keyup)="onHandleNama($event)"
+          type="text"
+          class="border border-blue-200 rounded-md p-1"
+          placeholder="Masukkan nama murid"
+        />
+      </div>
+      <div class="flex flex-col space-y-2">
+        <label>Jurusan Pilihan</label>
+        <select
+          #mySelect
+          (change)="onHandleJurusan(mySelect)"
+          name=""
+          class="border border-blue-200 rounded-md p-1 pr-4"
+        >
+          <option value="#" disabled selected>
+            Pilih Jurusan Yang Dipilih
+          </option>
+          <option *ngFor="let item of dataJurusan" [value]="item.id_jurusan">
+            {{ item.jurusan }}
+          </option>
+        </select>
+      </div>
+      <div class="grid grid-cols-2 space-x-4">
+        <div class="flex flex-col space-y-2">
+          <label>Pend. Agama</label>
+          <input
+            type="text"
+            (keyup)="onHandlePai($event)"
+            class="border border-blue-200 rounded-md p-1"
+            placeholder="Contoh: 80"
+          />
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label>Bahasa Indonesia</label>
+          <input
+            type="text"
+            (keyup)="onHandleBi($event)"
+            class="border border-blue-200 rounded-md p-1"
+            placeholder="Contoh: 80"
+          />
+        </div>
+      </div>
+      <div class="grid grid-cols-2 space-x-4">
+        <div class="flex flex-col space-y-2">
+          <label>Matematika</label>
+          <input
+            type="text"
+            (keyup)="onHandleMtk($event)"
+            class="border border-blue-200 rounded-md p-1"
+            placeholder="Contoh: 80"
+          />
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label>Sejarah</label>
+          <input
+            type="text"
+            (keyup)="onHandleSej($event)"
+            class="border border-blue-200 rounded-md p-1"
+            placeholder="Contoh: 80"
+          />
+        </div>
+      </div>
+      <div class="grid grid-cols-2 space-x-4">
+        <div class="flex flex-col space-y-2">
+          <label>Bahasa Inggris</label>
+          <input
+            type="text"
+            (keyup)="onHandleBing($event)"
+            class="border border-blue-200 rounded-md p-1"
+            placeholder="Contoh: 80"
+          />
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label>Seni Budaya</label>
+          <input
+            type="text"
+            (keyup)="onHandleSenbud($event)"
+            class="border border-blue-200 rounded-md p-1"
+            placeholder="Contoh: 80"
+          />
+        </div>
+      </div>
+      <div class="grid grid-cols-2 space-x-4">
+        <div class="flex flex-col space-y-2">
+          <label>Olahraga dan Keterampilan</label>
+          <input
+            type="text"
+            (keyup)="onHandleOk($event)"
+            class="border border-blue-200 rounded-md p-1"
+            placeholder="Contoh: 80"
+          />
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label>Fisika</label>
+          <input
+            type="text"
+            (keyup)="onHandleFis($event)"
+            class="border border-blue-200 rounded-md p-1"
+            placeholder="Contoh: 80"
+          />
+        </div>
+      </div>
+      <div class="grid grid-cols-2 space-x-4">
+        <div class="flex flex-col space-y-2">
+          <label>Bahasa Jawa</label>
+          <input
+            type="text"
+            (keyup)="onHandleBj($event)"
+            class="border border-blue-200 rounded-md p-1"
+            placeholder="Contoh: 80"
+          />
+        </div>
+      </div>
+      <div class="grid grid-cols-1 space-x-4">
+        <div class="flex flex-col space-y-2">
+          <button
+            id="submit"
+            type="button"
+            (click)="onSubmit()"
+            class="w-full text-white p-2 rounded-md hover:bg-blue-700"
+            [ngClass]="isLoading ? 'bg-blue-700 opacity-55' : 'bg-blue-500 '"
+            [disabled]="isLoading"
+          >
+            {{ isLoading ? "Loading..." : "Cek Rekomendasi" }}
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeTab === 1">
+      <div class="grid grid-cols-4 space-x-4 items-center">
+        <p *ngIf="activeTab === 1" class="col-span-3">
+          Upload file disini dengan menggunakan template yang dapat diunduh pada
+          tombol disamping
+        </p>
+        <button
+          type="button"
+          (click)="onDownload()"
+          class="bg-green-600 p-2 items-stretch text-white rounded-lg hover:bg-green-700"
+        >
+          Unduh Template
+        </button>
+      </div>
+      <div class="flex flex-col w-full">
+        <input
+          type="file"
+          class="border w-full border-blue-200 rounded-md p-1"
+          (change)="onFileSelected($event)"
+          accept=".csv, .txt, .json"
+        />
+
+        <button
+          type="button"
+          (click)="onSubmitFile()"
+          class="w-full mt-4 text-white p-2 rounded-md hover:bg-blue-700"
           [ngClass]="isLoading ? 'bg-blue-700 opacity-55' : 'bg-blue-500 '"
           [disabled]="isLoading"
         >
           {{ isLoading ? "Loading..." : "Cek Rekomendasi" }}
         </button>
       </div>
-    </div>
+    </ng-container>
   </form>
 </div>

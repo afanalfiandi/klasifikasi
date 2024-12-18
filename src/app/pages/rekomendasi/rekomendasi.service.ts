@@ -49,4 +49,18 @@ export class RekomendasiService {
 
     return this.http.get<Observable<ResultDTO[]>>(url);
   }
+
+  onUpload(file: File): Observable<any> {
+    const url = environment.apiUrl + '?act=onUpload';
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<any>(url, formData);
+  }
+
+  downloadCSV(fileName: string): Observable<Blob> {
+    const fileUrl = `assets/${fileName}`; // Tentukan path file yang akan diunduh
+    return this.http.get(fileUrl, { responseType: 'blob' });
+  }
 }

@@ -44,4 +44,9 @@ export class RiwayatComponent {
       )
       .subscribe();
   }
+
+  convertToPercentage(value: any): string {
+    const num = Number(value);
+    return isNaN(num) ? '0.00%' : `${(num * 100).toFixed(2)}%`;
+  }
 }
