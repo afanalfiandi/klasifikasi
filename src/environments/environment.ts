@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'http://localhost/knn/api/',
+  apiUrl: 'http://griya-cantik-lisa.my.id/knn/api/',
 };
