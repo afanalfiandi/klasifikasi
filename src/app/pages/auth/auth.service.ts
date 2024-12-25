@@ -1,11 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, mergeMap, Observable, of, tap } from 'rxjs';
+import { UserDTO } from '../../shared/dtos/user.dto';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  isLoggedIn$ = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient) {}
 
   onAuth(username?: any, password?: any) {
@@ -15,6 +18,17 @@ export class AuthService {
     const url = environment.apiUrl + '?act=login';
 
     const option = { params: qParams };
-    return this.http.get<Observable<any[]>>(url, option);
+    const response = this.http.get<Observable<UserDTO>>(url, option);
+    response
+      .pipe(
+        mergeMap((obs) => obs),
+        tap((res) => {
+          if (res) {
+            this.isLoggedIn$.next(true);
+          }
+        })
+      )
+      .subscribe();
+    return response;
   }
 }

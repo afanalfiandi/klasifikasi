@@ -1,4 +1,5 @@
 export interface RiwayatDTO {
+  id_klasifikasi: string;
   akurasi: string;
   bi: string;
   bing: string;
