@@ -3,7 +3,7 @@ export interface RiwayatDTO {
   akurasi: string;
   bi: string;
   bing: string;
-  bj: string;
+  jw: string;
   fis: string;
   hasil: string;
   jurusan_pilihan: string;
