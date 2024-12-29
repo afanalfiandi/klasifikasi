@@ -2,32 +2,39 @@
   class="h-screen w-screen overflow-hidden flex flex-col space-y-2 justify-center items-center space-x-20"
 >
   <div class="text-center">
-    <p class="text-3xl text-blue-500 font-bold">Riwayat</p>
-    <p>
+    <p class="text-3xl mb-2 text-blue-500 font-bold">Riwayat</p>
+
+    <p *ngIf="records.length">
       Data dibawah ini merupakan riwayat pencarian rekomendasi calon murid yang
       telah dilakukan
     </p>
+    <p *ngIf="!records.length">
+      Data riwayat belum tersedia. Silakan lakukan rekomendasi jurusan terlebih
+      dahulu.
+    </p>
   </div>
+  <ng-container *ngIf="records.length">
+    <div
+      *ngIf="authData?.id_role == '1'"
+      class="flex justify-between items-end space-x-2 text-white"
+    >
+      <button
+        type="button"
+        class="bg-green-500 p-2 hover:bg-green-700 rounded-md"
+        (click)="onExport()"
+      >
+        {{ isLoading ? "Loading..." : "Export" }}
+      </button>
+      <button
+        type="button"
+        class="bg-red-700 p-2 hover:bg-red-800 rounded-md"
+        (click)="onDeletAll()"
+      >
+        {{ isLoading ? "Loading..." : "Hapus Semua Data" }}
+      </button>
+    </div>
+  </ng-container>
 
-  <div
-    *ngIf="authData?.id_role == '1'"
-    class="flex justify-between items-end space-x-2 text-white"
-  >
-    <button
-      type="button"
-      class="bg-green-500 p-2 hover:bg-green-700 rounded-md"
-      (click)="onExport()"
-    >
-      {{ isLoading ? "Loading..." : "Export" }}
-    </button>
-    <button
-      type="button"
-      class="bg-red-700 p-2 hover:bg-red-800 rounded-md"
-      (click)="onDeletAll()"
-    >
-      {{ isLoading ? "Loading..." : "Hapus Semua Data" }}
-    </button>
-  </div>
   <div class="w-[65%] p-2 space-y-4 max-h-[65%] overflow-y-auto">
     <div class="flex flex-col">
       <div class="-m-1.5 overflow-x-auto">
