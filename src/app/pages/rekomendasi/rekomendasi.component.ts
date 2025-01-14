@@ -137,7 +137,8 @@ export class RekomendasiComponent implements OnInit {
 
               Swal.fire({
                 title: 'Rekomendasi Jurusan',
-                html: `Berdasarkan nilai yang Anda masukkan, jurusan yang cocok adalah: <b>${jurusan}</b> dengan presentase akurasi sebesar <b>${percentage}%</b>`,
+                // html: `Berdasarkan nilai yang Anda masukkan, jurusan yang cocok adalah: <b>${jurusan}</b> dengan presentase akurasi sebesar <b>${percentage}%</b>`,
+                html: `Berdasarkan nilai yang Anda masukkan, jurusan yang cocok adalah: <b>${jurusan}</b>`,
                 icon: 'success',
                 confirmButtonText: 'OK',
               }).then((res) => {
