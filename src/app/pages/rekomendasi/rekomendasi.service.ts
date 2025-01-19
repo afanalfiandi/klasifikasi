@@ -26,7 +26,7 @@ export class RekomendasiService {
   ) {
     let qParams = new HttpParams()
       .set('nama', nama)
-      .set('jurusan', jurusan)
+      .set('jurusan', 1)
       .set('pai', pai)
       .set('bi', bi)
       .set('mtk', mtk)

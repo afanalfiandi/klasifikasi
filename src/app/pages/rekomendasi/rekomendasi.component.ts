@@ -14,8 +14,8 @@ export class RekomendasiComponent implements OnInit {
 
   dataJurusan: any[] = [];
   nama: any = null;
-  jurusan: any = null;
-  jurusanString: any = null;
+  jurusan: any = 1;
+  jurusanString: any = 'Teknik Audio Video';
   pai: any = null;
   bi: any = null;
   mtk: any = null;
